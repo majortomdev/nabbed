@@ -29,6 +29,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# my own keys
+/pw_codes_etc
+
 # vercel
 .vercel
 
