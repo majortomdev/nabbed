@@ -10,7 +10,7 @@ export async function syncUser(){
         const user = await currentUser();
 
         if(!userId || !user) return;
-        
+
         const existingUser = await prisma.user.findUnique({
             where:{
                 clerkId:userId
@@ -33,4 +33,21 @@ export async function syncUser(){
     } catch (error) {
         console.log("Error in syncUser",error);
     }
+}
+
+export async function getUserByClerkId(clerkId:string) {
+    return prisma.user.findUnique({
+        where: {
+            clerkId,
+        },
+        include:{
+            _count:{
+                select:{
+                    followers:true,
+                    following:true,
+                    posts:true
+                }
+            }
+        }
+    })
 }
